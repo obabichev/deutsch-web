@@ -8,7 +8,6 @@ export class LoginComponent extends Component {
     state = {
         email: '',
         password: '',
-        submitted: false
     };
 
     handleChange = event => {
@@ -28,12 +27,12 @@ export class LoginComponent extends Component {
     };
 
     render() {
-        const {loggingIn} = this.props;
-        const {email, password, submitted} = this.state;
+        const {isLoading} = this.props;
+        const {email, password} = this.state;
 
         return <div>
             <form name="form" onSubmit={this.handleSubmit}>
-                <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
+                <div>
                     <label htmlFor="email">Email</label>
                     <input
                         type="text"
@@ -41,11 +40,8 @@ export class LoginComponent extends Component {
                         name="email"
                         value={email}
                         onChange={this.handleChange}/>
-                    {submitted && !email &&
-                    <div className="help-block">Email is required</div>
-                    }
                 </div>
-                <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
+                <div>
                     <label htmlFor="password">Password</label>
                     <input
                         type="password"
@@ -53,13 +49,10 @@ export class LoginComponent extends Component {
                         name="password"
                         value={password}
                         onChange={this.handleChange}/>
-                    {submitted && !password &&
-                    <div className="help-block">Password is required</div>
-                    }
                 </div>
-                <div className="form-group">
+                <div>
                     <button className="btn btn-primary">Login</button>
-                    {loggingIn &&
+                    {isLoading &&
                     <img
                         src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
                     }

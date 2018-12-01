@@ -36,32 +36,33 @@ export class RegisterComponent extends Component {
 
     render() {
         const {isLoading} = this.props;
-        const {user, submitted} = this.state;
+        const {user} = this.state;
 
         return <div>
             <h2>Register</h2>
             <form name="form" onSubmit={this.handleSubmit}>
-                <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
+                <div>
                     <label htmlFor="firstName">Name</label>
                     <input type="text" className="form-control" name="name" value={user.firstName}
                            onChange={this.handleChange}/>
                 </div>
-                <div className={'form-group' + (submitted && !user.email ? ' has-error' : '')}>
+                <div>
                     <label htmlFor="email">Email</label>
                     <input type="text" className="form-control" name="email" value={user.email}
                            onChange={this.handleChange}/>
                 </div>
-                <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
+                <div>
                     <label htmlFor="password">Password</label>
                     <input type="password" className="form-control" name="password" value={user.password}
                            onChange={this.handleChange}/>
                 </div>
-                <div className={'form-group' + (submitted && !user.password_confirmation ? ' has-error' : '')}>
+                <div>
                     <label htmlFor="password_confirmation">Password confirmation</label>
-                    <input type="password" className="form-control" name="password_confirmation" value={user.password_confirmation}
+                    <input type="password" className="form-control" name="password_confirmation"
+                           value={user.password_confirmation}
                            onChange={this.handleChange}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <button className="btn btn-primary">Register</button>
                     {isLoading &&
                     <img

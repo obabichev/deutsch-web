@@ -1,10 +1,9 @@
 import * as authActions from '../auth.actions';
 import * as loadingActions from '../loading.actions';
-import {loadingIds} from '../loading.constants';
 import {history} from '../../helpers/history';
 
 export const login = (email, password) => dispatch => {
-    dispatch(authActions.loginRequest(email));
+    dispatch(loadingActions.loadingStartAction());
 
     fetch('http://127.0.0.1:8000/api/login', {
         method: 'post',
@@ -16,12 +15,11 @@ export const login = (email, password) => dispatch => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('[obabichev] data', {data});
+            dispatch(loadingActions.loadingEndAction());
             if (data.errors) {
-                dispatch(authActions.loginFailuer(data.errors));
             } else {
                 const user = data.data;
-                dispatch(authActions.loginSuccess(user));
+                dispatch(authActions.loginSuccessAction(user));
                 localStorage.setItem('user', JSON.stringify(user));
                 history.push('/');
             }
@@ -42,12 +40,17 @@ export const register = (user) => dispatch => {
         .then((data) => {
             dispatch(loadingActions.loadingEndAction());
             if (data.errors) {
-                dispatch(authActions.loginFailuer(data.errors));
             } else {
                 const user = data.data;
-                dispatch(authActions.loginSuccess(user));
+                dispatch(authActions.loginSuccessAction(user));
                 localStorage.setItem('user', JSON.stringify(user));
                 history.push('/');
             }
         });
+};
+
+export const logout = () => dispatch => {
+    localStorage.removeItem('user');
+    dispatch(authActions.logoutAction());
+    history.push('/login');
 };
