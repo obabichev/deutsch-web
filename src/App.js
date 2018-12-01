@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import './App.css';
-import {LoginComponent} from './Components/LoginComponent';
+import {LoginContainer} from './containers/LoginContainer';
 
 class App extends Component {
     render() {
         return (
             <div className="App">
-                <LoginComponent/>
+                <LoginContainer/>
             </div>
         );
     }
