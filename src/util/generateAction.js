@@ -1,4 +1,4 @@
-export const generateAction = (type, payload) => ({
+export const generateAction = (type, payload = {}) => ({
     type,
     payload
 });

@@ -16,28 +16,6 @@ export class LoginComponent extends Component {
         this.setState({[name]: value});
     };
 
-    //
-    // handleSubmit = event => {
-    //     event.preventDefault();
-    //     console.log('[obabichev] Login!!!!');
-    //
-    //     fetch('http://127.0.0.1:8000/api/login', {
-    //         method: 'post',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Accept': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             "email": this.state.email,
-    //             "password": this.state.password
-    //         })
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log('[obabichev] data', data);
-    //         });
-    // };
-
     handleSubmit = event => {
         event.preventDefault();
 
@@ -48,10 +26,6 @@ export class LoginComponent extends Component {
             dispatch(authActions.login(email, password));
         }
     };
-
-    // validateForm() {
-    //     return this.state.email.length > 0 && this.state.password.length > 0;
-    // }
 
     render() {
         const {loggingIn} = this.props;
@@ -89,7 +63,7 @@ export class LoginComponent extends Component {
                     <img
                         src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
                     }
-                    {/*<Link to="/register" className="btn btn-link">Register</Link>*/}
+                    <Link to="/register" className="btn btn-link">Register</Link>
                 </div>
             </form>
         </div>;
