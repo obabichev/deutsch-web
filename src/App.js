@@ -7,6 +7,8 @@ import {history} from './helpers/history';
 import {PrivateRoute} from './components/PrivatRouter';
 import {RegisterContainer} from './containers/RegisterContainer';
 import {HomeContainer} from './containers/HomeContainer';
+import {GlossaryDetailsContainer} from './containers/GlossaryDetailsContainer';
+
 
 class App extends Component {
     render() {
@@ -18,6 +20,7 @@ class App extends Component {
             <Router history={history}>
                 <div>
                     <PrivateRoute exact path="/" component={HomeContainer}/>
+                    <PrivateRoute exact path="/glossary/:id/" component={GlossaryDetailsContainer}/>
                     <Route path="/login" component={LoginContainer}/>
                     <Route path="/register" component={RegisterContainer}/>
                 </div>
