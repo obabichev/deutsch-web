@@ -1,4 +1,4 @@
-import {ACTION_GLOSSARY_GET_ITEM, ACTION_GLOSSARY_GET_LIST} from '../actions/glossary.constants';
+import {ACTION_GLOSSARY_GET_ITEM, ACTION_GLOSSARY_GET_LIST, GLOSSARY_CARD_CREATED} from '../actions/glossary.constants';
 
 export const glossary = (state = [], action = {}) => {
     const {payload} = action;
@@ -21,6 +21,19 @@ export const glossary = (state = [], action = {}) => {
                 result = [...result, glossary];
             }
             return result;
+        }
+        case GLOSSARY_CARD_CREATED: {
+            const {glossaryCard} = payload;
+            return state.map(glossary => {
+                if (glossary.id !== glossaryCard.glossary_id) {
+                    return glossary;
+                } else {
+                    return ({
+                        ...glossary,
+                        cards: [...glossary.cards, glossaryCard]
+                    })
+                }
+            });
         }
         default:
             return state;

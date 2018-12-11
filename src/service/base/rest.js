@@ -3,12 +3,11 @@ const request = ({url, method, body}) => {
 
     return fetch(url, {
         method,
-        // body,
+        body: JSON.stringify(body),
         headers: {
-            // 'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': `
-    Bearer ${user.api_token}`
+            'Authorization': `Bearer ${user.api_token}`
         },
     })
         .then(response => response.json());
@@ -19,7 +18,7 @@ const get = (url) => {
 };
 
 const post = (url, body) => {
-
+    return request({url, method: 'post', body});
 };
 
 export const rest = {
