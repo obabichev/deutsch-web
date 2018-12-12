@@ -10,7 +10,12 @@ const request = ({url, method, body}) => {
             'Authorization': `Bearer ${user.api_token}`
         },
     })
-        .then(response => response.json());
+        .then(response => {
+            if (method === 'delete') {
+                return null;
+            }
+            return response.json();
+        });
 };
 
 const get = (url) => {
@@ -21,7 +26,12 @@ const post = (url, body) => {
     return request({url, method: 'post', body});
 };
 
+const del = (url) => {
+    return request({url, method: 'delete'});
+};
+
 export const rest = {
     get,
-    post
+    post,
+    del
 };

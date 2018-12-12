@@ -37,8 +37,6 @@ export class GlossaryDetailsComponent extends Component {
     };
 
     onCardCreate = (word, translation) => {
-        console.log('[obabichev] word', word);
-        console.log('[obabichev] translation', translation);
 
         const {addCardToGlossary, glossary} = this.props;
 
@@ -47,10 +45,16 @@ export class GlossaryDetailsComponent extends Component {
     };
 
     renderCard = (card) => {
-        return <div key={card.id} style={{backgroundColor: 'lightgray', margin: '10px', padding: '5px'}}>
-            <p>{card.word.val}</p>
-            <p>{card.translation.val}</p>
-        </div>;
+        return <div style={{"flex-flow": "row wrap", display: "flex"}}>
+            <div key={card.id} style={{backgroundColor: 'lightgray', margin: '10px', padding: '5px', width: "300px"}}>
+                <p>{card.word.val}</p>
+                <p>{card.translation.val}</p>
+            </div>
+            <div style={{backgroundColor: 'red', margin: '10px', padding: '5px', width: "50px"}}
+                 onClick={this.onDeleteClick(card.id)}>
+                DEL
+            </div>
+        </div>
     };
 
     renderAddButton = () => {
@@ -62,5 +66,9 @@ export class GlossaryDetailsComponent extends Component {
 
     onAddClick = () => {
         this.setState({addingCard: true})
+    };
+
+    onDeleteClick = (glossaryCardId) => () => {
+        this.props.removeGlossaryCard(glossaryCardId);
     }
 }

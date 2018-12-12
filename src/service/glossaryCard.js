@@ -10,3 +10,9 @@ export const createGlossaryCard = (glossaryId, wordId, translationId) => {
         }
     );
 };
+
+export const delGlossaryCard = (cardId) => {
+    return rest.del(
+        `http://127.0.0.1:8000/api/glossarycard/${cardId}/`
+    );
+};
