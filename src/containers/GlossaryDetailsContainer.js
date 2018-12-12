@@ -1,7 +1,10 @@
 import {connect} from 'react-redux';
 import {GlossaryDetailsComponent} from '../components/GlossaryDetailsComponent';
 import {glossarySelectorByPath} from '../selectors/glossary.selectors';
-import {addCardToGlossary, removeGlossaryCard, updateGlossary} from '../actions/thunk/glossary.thunk.actions';
+import {
+    addCardToGlossary, removeGlossaryCard,
+    updateGlossary
+} from '../actions/thunk/glossary.thunk.actions';
 
 const mapStateToProps = (state, props) => ({
     glossary: glossarySelectorByPath(state, props)

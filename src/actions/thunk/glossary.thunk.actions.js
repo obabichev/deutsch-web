@@ -1,9 +1,10 @@
-import {getGlossaries, getGlossary} from '../../service/glossary';
+import {getGlossaries, getGlossary, postGlossary} from '../../service/glossary';
 import {
-    glossariesListAction, glossarycardCreateAction, glossaryCardDeletedAction,
+    glossariesListAction, glossarycardCreateAction, glossaryCardDeletedAction, glossaryCreatedAction,
     glossaryItemAction
 } from '../glossary.actions';
 import {createGlossaryCard, delGlossaryCard} from '../../service/glossaryCard';
+import {history} from '../../helpers/history';
 
 export const updateGlossaries = () => dispatch => {
     getGlossaries().then(
@@ -19,6 +20,16 @@ export const updateGlossary = (id) => dispatch => {
             dispatch(glossaryItemAction(glossary));
         }
     )
+};
+
+export const createGlossary = (title) => dispatch => {
+    return postGlossary(title)
+        .then(
+            glossary => {
+                dispatch(glossaryCreatedAction(glossary));
+                history.push(`/glossary/${glossary.id}/`);
+            }
+        );
 };
 
 export const addCardToGlossary = (glossaryId, wordId, translationId) => dispatch => {

@@ -11,6 +11,10 @@ export class GlossaryScreenComponent extends Component {
     render() {
         return <div>
             <h1>Glossaries</h1>
+            <div style={{width: 50, height: 50, backgroundColor: 'lightgray', margin: '10px', padding: '5px'}}
+                 onClick={() => this.props.createGlossary('Unknown')}>
+                NEW
+            </div>
 
             {this.renderGlossaries()}
         </div>;

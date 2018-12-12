@@ -7,3 +7,7 @@ export const getGlossaries = () => {
 export const getGlossary = (id) => {
     return rest.get(`http://127.0.0.1:8000/api/glossary/${id}/`);
 };
+
+export const postGlossary = (title) => {
+    return rest.post('http://127.0.0.1:8000/api/glossary', {title});
+};
