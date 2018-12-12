@@ -1,6 +1,7 @@
-import {getGlossaries, getGlossary, postGlossary} from '../../service/glossary';
+import {delGlossary, getGlossaries, getGlossary, postGlossary} from '../../service/glossary';
 import {
     glossariesListAction, glossarycardCreateAction, glossaryCardDeletedAction, glossaryCreatedAction,
+    glossaryDeletedAction,
     glossaryItemAction
 } from '../glossary.actions';
 import {createGlossaryCard, delGlossaryCard} from '../../service/glossaryCard';
@@ -28,6 +29,16 @@ export const createGlossary = (title) => dispatch => {
             glossary => {
                 dispatch(glossaryCreatedAction(glossary));
                 history.push(`/glossary/${glossary.id}/`);
+            }
+        );
+};
+
+export const removeGlossary = (glossaryId) => dispatch =>{
+    return delGlossary(glossaryId)
+        .then(
+            () => {
+                dispatch(glossaryDeletedAction(glossaryId));
+                history.goBack();
             }
         );
 };

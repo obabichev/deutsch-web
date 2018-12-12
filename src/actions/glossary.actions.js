@@ -1,6 +1,6 @@
 import {generateAction} from '../util/generateAction';
 import {
-    ACTION_GLOSSARY_CREATED,
+    ACTION_GLOSSARY_CREATED, ACTION_GLOSSARY_DELETED,
     ACTION_GLOSSARY_GET_ITEM, ACTION_GLOSSARY_GET_LIST, GLOSSARY_CARD_CREATED,
     GLOSSARY_CARD_DELETED
 } from './glossary.constants';
@@ -18,6 +18,11 @@ export const glossaryItemAction = (glossary) => generateAction(
 export const glossaryCreatedAction = (glossary) => generateAction(
     ACTION_GLOSSARY_CREATED,
     {glossary}
+);
+
+export const glossaryDeletedAction = glossaryId => generateAction(
+    ACTION_GLOSSARY_DELETED,
+    {glossaryId}
 );
 
 export const glossarycardCreateAction = (glossaryCard) => generateAction(

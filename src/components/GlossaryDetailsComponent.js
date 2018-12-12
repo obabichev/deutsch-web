@@ -23,6 +23,10 @@ export class GlossaryDetailsComponent extends Component {
     renderGlossary = (glossary) => {
         return <div>
             <h2>{glossary.title}</h2>
+            <div onClick={() => this.props.removeGlossary(glossary.id)}
+                 style={{backgroundColor: 'red', margin: '10px', padding: '5px', width: "100px"}}>
+                DELETE
+            </div>
             <div>
                 {glossary.cards.map(this.renderCard)}
             </div>

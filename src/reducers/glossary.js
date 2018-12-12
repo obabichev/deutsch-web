@@ -1,5 +1,5 @@
 import {
-    ACTION_GLOSSARY_CREATED,
+    ACTION_GLOSSARY_CREATED, ACTION_GLOSSARY_DELETED,
     ACTION_GLOSSARY_GET_ITEM, ACTION_GLOSSARY_GET_LIST, GLOSSARY_CARD_CREATED,
     GLOSSARY_CARD_DELETED
 } from '../actions/glossary.constants';
@@ -26,6 +26,10 @@ export const glossary = (state = [], action = {}) => {
                 result = [...result, glossary];
             }
             return result;
+        }
+        case ACTION_GLOSSARY_DELETED: {
+            const {glossaryId} = payload;
+            return state.filter(glossary => glossary.id !== glossaryId);
         }
         case GLOSSARY_CARD_CREATED: {
             const {glossaryCard} = payload;

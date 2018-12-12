@@ -11,3 +11,9 @@ export const getGlossary = (id) => {
 export const postGlossary = (title) => {
     return rest.post('http://127.0.0.1:8000/api/glossary', {title});
 };
+
+export const delGlossary = (glossaryId) => {
+    return rest.del(
+        `http://127.0.0.1:8000/api/glossary/${glossaryId}/`
+    );
+};
