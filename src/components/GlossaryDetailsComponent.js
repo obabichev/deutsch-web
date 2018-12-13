@@ -4,11 +4,15 @@ import {CreateCardComponent} from './CreateCardComponent';
 export class GlossaryDetailsComponent extends Component {
 
     state = {
-        addingCard: false
+        addingCard: false,
+        editingTitle: false,
+        titleInput: ''
     };
 
+    titleInputRef = null;
+
     componentDidMount() {
-        this.props.updateGlossary(this.props.match.params.id);
+        this.props.downloadGlossary(this.props.match.params.id);
     }
 
     render() {
@@ -22,7 +26,7 @@ export class GlossaryDetailsComponent extends Component {
 
     renderGlossary = (glossary) => {
         return <div>
-            <h2>{glossary.title}</h2>
+            {this.renderTitle()}
             <div onClick={() => this.props.removeGlossary(glossary.id)}
                  style={{backgroundColor: 'red', margin: '10px', padding: '5px', width: "100px"}}>
                 DELETE
@@ -38,6 +42,58 @@ export class GlossaryDetailsComponent extends Component {
 
             <div style={{height: '200px'}}></div>
         </div>;
+    };
+
+    renderTitle = () => {
+        const {glossary} = this.props;
+        if (this.state.editingTitle) {
+            return <div style={{margin: '10px', padding: '5px'}}>
+                <form name="form"
+                      onSubmit={this.onTitleSubmit}>
+                    <input value={this.state.titleInput}
+                           onChange={this.onTitleChange}
+                           ref={(input) => this.titleInputRef = input}/>
+                    <button className="btn btn-primary">Save</button>
+                </form>
+            </div>;
+        }
+        return <div style={{margin: '10px', padding: '5px'}}
+                    onClick={this.onTitleClick}>
+            <h2>{glossary.title}</h2>
+        </div>;
+    };
+
+    onTitleChange = (event) => {
+        event.preventDefault();
+        const {value} = event.target;
+        this.setState({
+            titleInput: value
+        });
+    };
+
+    onTitleSubmit = (event) => {
+        event.preventDefault();
+        this.props.updateGlossary({
+            id: this.props.glossary.id,
+            title: this.state.titleInput
+        });
+        this.setState({
+            editingTitle: false,
+            titleInput: ''
+        });
+    };
+
+    onTitleClick = () => {
+        this.setState({
+            editingTitle: true,
+            titleInput: this.props.glossary.title
+        }, () => this.focusTitleInput());
+    };
+
+    focusTitleInput = () => {
+        if (this.titleInputRef) {
+            this.titleInputRef.focus();
+        }
     };
 
     onCardCreate = (word, translation) => {

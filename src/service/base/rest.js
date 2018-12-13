@@ -26,6 +26,10 @@ const post = (url, body) => {
     return request({url, method: 'post', body});
 };
 
+const put = (url, body) => {
+    return request({url, method: 'put', body});
+};
+
 const del = (url) => {
     return request({url, method: 'delete'});
 };
@@ -33,5 +37,6 @@ const del = (url) => {
 export const rest = {
     get,
     post,
+    put,
     del
 };

@@ -1,4 +1,4 @@
-import {delGlossary, getGlossaries, getGlossary, postGlossary} from '../../service/glossary';
+import {delGlossary, getGlossaries, getGlossary, postGlossary, putGlossary} from '../../service/glossary';
 import {
     glossariesListAction, glossarycardCreateAction, glossaryCardDeletedAction, glossaryCreatedAction,
     glossaryDeletedAction,
@@ -7,7 +7,7 @@ import {
 import {createGlossaryCard, delGlossaryCard} from '../../service/glossaryCard';
 import {history} from '../../helpers/history';
 
-export const updateGlossaries = () => dispatch => {
+export const downloadGlossaries = () => dispatch => {
     getGlossaries().then(
         glossaries => {
             dispatch(glossariesListAction(glossaries));
@@ -15,7 +15,7 @@ export const updateGlossaries = () => dispatch => {
     )
 };
 
-export const updateGlossary = (id) => dispatch => {
+export const downloadGlossary = (id) => dispatch => {
     return getGlossary(id).then(
         glossary => {
             dispatch(glossaryItemAction(glossary));
@@ -33,7 +33,16 @@ export const createGlossary = (title) => dispatch => {
         );
 };
 
-export const removeGlossary = (glossaryId) => dispatch =>{
+export const updateGlossary = (glossary) => dispatch => {
+    return putGlossary(glossary)
+        .then(
+            glossary => {
+                dispatch(glossaryItemAction(glossary));
+            }
+        )
+};
+
+export const removeGlossary = (glossaryId) => dispatch => {
     return delGlossary(glossaryId)
         .then(
             () => {
