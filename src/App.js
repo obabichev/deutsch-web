@@ -8,6 +8,7 @@ import {PrivateRoute} from './components/PrivatRouter';
 import {RegisterContainer} from './containers/RegisterContainer';
 import {HomeContainer} from './containers/HomeContainer';
 import {GlossaryDetailsContainer} from './containers/GlossaryDetailsContainer';
+import {LearnWordsContainer} from './containers/LearnWordsContainer';
 
 
 class App extends Component {
@@ -20,7 +21,8 @@ class App extends Component {
             <Router history={history}>
                 <div>
                     <PrivateRoute exact path="/" component={HomeContainer}/>
-                    <PrivateRoute exact path="/glossary/:id/" component={GlossaryDetailsContainer}/>
+                    <PrivateRoute exact path="/glossary/:glossaryId/" component={GlossaryDetailsContainer}/>
+                    <PrivateRoute exact path="/learn/glossary/:glossaryId" component={LearnWordsContainer}/>
                     <Route path="/login" component={LoginContainer}/>
                     <Route path="/register" component={RegisterContainer}/>
                 </div>

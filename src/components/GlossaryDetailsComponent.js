@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {CreateCardComponent} from './CreateCardComponent';
+import {Link} from 'react-router-dom';
 
 export class GlossaryDetailsComponent extends Component {
 
@@ -12,7 +13,7 @@ export class GlossaryDetailsComponent extends Component {
     titleInputRef = null;
 
     componentDidMount() {
-        this.props.downloadGlossary(this.props.match.params.id);
+        this.props.downloadGlossary(this.props.match.params.glossaryId);
     }
 
     render() {
@@ -31,6 +32,11 @@ export class GlossaryDetailsComponent extends Component {
                  style={{backgroundColor: 'red', margin: '10px', padding: '5px', width: "100px"}}>
                 DELETE
             </div>
+
+            <div style={{margin: '10px'}}>
+                <Link to={`/learn/glossary/${glossary.id}`} className="btn btn-link">Learn</Link>
+            </div>
+
             <div>
                 {glossary.cards.map(this.renderCard)}
             </div>
