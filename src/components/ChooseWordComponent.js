@@ -7,7 +7,6 @@ export class ChooseWordComponent extends Component {
     state = {
         cardsToLearn: [],
         index: 0,
-        currentCard: null,
         cards: [],
         learned: [],
         cardResult: null
@@ -21,14 +20,38 @@ export class ChooseWordComponent extends Component {
 
         this.setState({
             cardsToLearn,
-            currentCard,
             cards,
             index
         });
+
+        document.addEventListener("keydown", this.onKeyPress, false);
     }
 
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.onKeyPress, false);
+    }
+
+    onKeyPress = event => {
+        const keyOne = 49;
+
+        const key = event.keyCode;
+
+        const {cards} = this.state;
+
+        const index = key - keyOne;
+        if (index < 0) {
+            return;
+        }
+
+        if (cards && index < cards.length) {
+            const card = cards[index];
+            this.onCardClick(card)();
+        }
+    };
+
     render() {
-        const {currentCard, cards} = this.state;
+        const {cards} = this.state;
+        const currentCard = this.currentCard();
 
         if (this.state.cardResult) {
             return this.renderCardResult();
@@ -55,15 +78,8 @@ export class ChooseWordComponent extends Component {
     onCardClick = (card) => () => {
         const {cardsToLearn} = this.state;
 
-        // let index = this.state.index + 1;
-        // if (index === cardsToLearn.length) {
-        //     this.props.onFinish(this.state.learned);
-        //     return;
-        // }
         const index = this.state.index;
         const currentCard = cardsToLearn[index];
-
-        // const cards = _.shuffle([..._.slice(_.shuffle(cardsToLearn.filter(card => card.id !== currentCard.id)), 0, 3), currentCard]);
 
         const isCorrect = currentCard.id === card.id;
 
@@ -98,7 +114,7 @@ export class ChooseWordComponent extends Component {
     onCardResultClick = (event) => {
         event.preventDefault();
         const {cardsToLearn, index} = this.state;
-        const currentCard = cardsToLearn[index];
+        const currentCard = cardsToLearn[index + 1];
 
         if (index + 1 === cardsToLearn.length) {
             this.props.onFinish(this.state.learned);
@@ -108,9 +124,13 @@ export class ChooseWordComponent extends Component {
         const cards = _.shuffle([..._.slice(_.shuffle(cardsToLearn.filter(card => card.id !== currentCard.id)), 0, 3), currentCard]);
         this.setState({
             cards,
-            currentCard,
             index: index + 1,
             cardResult: null
         })
     };
+
+    currentCard = () => {
+        const {index, cardsToLearn} = this.state;
+        return cardsToLearn[index];
+    }
 }

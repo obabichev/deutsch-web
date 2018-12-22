@@ -28,7 +28,7 @@ export class GlossaryDetailsComponent extends Component {
     }
 
     renderGlossary = (glossary) => {
-
+        const {wordProgresses} = this.props;
         const total = glossary.cards.length;
         const learned = this.props.wordProgresses ? this.props.wordProgresses.filter(wp => wp.learned).length : 0;
 
@@ -40,9 +40,9 @@ export class GlossaryDetailsComponent extends Component {
                 DELETE
             </div>
 
-            <div style={{margin: '10px'}}>
+            {(wordProgresses && learned < total) && <div style={{margin: '10px'}}>
                 <Link to={`/learn/glossary/${glossary.id}`} className="btn btn-link">Learn</Link>
-            </div>
+            </div>}
 
             <div>
                 {glossary.cards.map(this.renderCard)}

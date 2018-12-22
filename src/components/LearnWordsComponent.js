@@ -8,7 +8,7 @@ export class LearnWordsComponent extends Component {
 
     state = {
         cardsToLearn: null,
-        step: 1,
+        step: 0,
         firstLearned: [],
     };
 
