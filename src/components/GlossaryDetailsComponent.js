@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {CreateCardComponent} from './CreateCardComponent';
 import {Link} from 'react-router-dom';
+import _ from 'lodash';
 
 export class GlossaryDetailsComponent extends Component {
 
@@ -14,10 +15,11 @@ export class GlossaryDetailsComponent extends Component {
 
     componentDidMount() {
         this.props.downloadGlossary(this.props.match.params.glossaryId);
+        this.props.downloadWordProgresses();
     }
 
     render() {
-        const {glossary} = this.props;
+        const {glossary, wordProgresses} = this.props;
         if (glossary) {
             return this.renderGlossary(glossary);
         }
@@ -26,8 +28,13 @@ export class GlossaryDetailsComponent extends Component {
     }
 
     renderGlossary = (glossary) => {
+
+        const total = glossary.cards.length;
+        const learned = this.props.wordProgresses ? this.props.wordProgresses.filter(wp => wp.learned).length : 0;
+
         return <div>
             {this.renderTitle()}
+            <p>Learned {learned}/{total}</p>
             <div onClick={() => this.props.removeGlossary(glossary.id)}
                  style={{backgroundColor: 'red', margin: '10px', padding: '5px', width: "100px"}}>
                 DELETE
@@ -111,10 +118,16 @@ export class GlossaryDetailsComponent extends Component {
     };
 
     renderCard = (card) => {
-        return <div style={{"flex-flow": "row wrap", display: "flex"}}>
-            <div key={card.id} style={{backgroundColor: 'lightgray', margin: '10px', padding: '5px', width: "300px"}}>
+        const {wordProgresses} = this.props;
+
+        const wordProgress = _.find(wordProgresses, wordProgress => wordProgress.word_id === card.word.id);
+
+        return <div style={{"flexFlow": "row wrap", display: "flex"}}
+                    key={card.id}>
+            <div style={{backgroundColor: 'lightgray', margin: '10px', padding: '5px', width: "300px"}}>
                 <p>{card.word.val}</p>
                 <p>{card.translation.val}</p>
+                <p>{(wordProgress && wordProgress.learned) ? 'Learned' : 'Not learned' }</p>
             </div>
             <div style={{backgroundColor: 'red', margin: '10px', padding: '5px', width: "50px"}}
                  onClick={this.onDeleteClick(card.id)}>

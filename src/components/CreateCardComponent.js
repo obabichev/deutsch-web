@@ -40,7 +40,6 @@ export class CreateCardComponent extends Component {
     };
 
     onWordSelect = (value) => {
-        console.log('[obabichev] SELECTED VALUE', value);
         this.setState({wordInput: value});
         this.state.wordSearch.forEach(word => {
             if (word.val === value) {
@@ -85,7 +84,6 @@ export class CreateCardComponent extends Component {
     };
 
     onTranslationSelect = (value) => {
-        console.log('[obabichev] SELECTED VALUE', value);
         this.setState({translationInput: value});
         this.state.translationSearch.forEach(translation => {
             if (translation.val === value) {

@@ -8,12 +8,11 @@ export class LearnWordsComponent extends Component {
 
     state = {
         cardsToLearn: null,
-        step: 0,
+        step: 1,
         firstLearned: [],
     };
 
     componentDidMount() {
-        console.log('[obabichev] component did mount');
         const glossaryId = this.props.match.params.glossaryId;
         this.props.downloadWordProgresses();
         this.props.downloadGlossary(glossaryId);
@@ -21,7 +20,6 @@ export class LearnWordsComponent extends Component {
     }
 
     componentDidUpdate() {
-        console.log('[obabichev] component id update');
         this.updateCardsToLearn();
     }
 
@@ -45,8 +43,6 @@ export class LearnWordsComponent extends Component {
     };
 
     render() {
-        console.log('[obabichev] render', this.props);
-        console.log('[obabichev] render.state', this.state);
         if (!this.state.cardsToLearn) {
             return <div>
                 There is nothing to learn...
@@ -82,12 +78,9 @@ export class LearnWordsComponent extends Component {
     };
 
     onLearn = (word, success) => {
-        console.log('[obabichev] saveLearned', word);
-        console.log('[obabichev] success', success);
         const {firstLearned} = this.state;
         const learnedBefore = _.indexOf(firstLearned, word.id) !== -1;
         success = success && learnedBefore;
-        console.log('[obabichev] success2', success);
 
         this.props.saveWordProgress(word, success);
     };

@@ -1,5 +1,4 @@
 export const fullForm = (word) => {
-    console.log('[obabichev] word', word);
     if (word.gender) {
         return `${genderToArticle(word.gender)} ${word.val}`;
     }

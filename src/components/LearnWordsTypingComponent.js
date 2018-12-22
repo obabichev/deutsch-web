@@ -8,11 +8,22 @@ export class LearnWordsTypingComponent extends Component {
     state = {
         index: 0,
         learned: [],
-        input: ''
+        input: '',
+        cardResult: null
     };
+
+    ref = null;
+
+    componentDidMount() {
+        this.focus();
+    }
 
     render() {
         const card = this.props.cardsToLearn[this.state.index];
+
+        if (this.state.cardResult) {
+            return this.renderCardResult();
+        }
 
         return <div>
             LearnWordsTypingComponent
@@ -26,9 +37,10 @@ export class LearnWordsTypingComponent extends Component {
             <div>
                 {card.translation.val}
             </div>
-            <form onSubmit={this.onSubmit(card.word)}>
+            <form onSubmit={this.onSubmit(card)}>
                 <input value={this.state.input}
-                       onChange={this.onChangeInput}/>
+                       onChange={this.onChangeInput}
+                       ref={ref => this.ref = ref}/>
             </form>
         </div>;
     };
@@ -41,33 +53,61 @@ export class LearnWordsTypingComponent extends Component {
         });
     };
 
-    onSubmit = word => (event) => {
+    onSubmit = card => (event) => {
+        event.preventDefault();
+
+        const isCorrect = fullForm(card.word) === this.state.input;
+
+        this.props.onLearn(card.word, isCorrect);
+
+        const cardResult = {
+            isCorrect,
+            expectedCard: card,
+            actualValue: this.state.input,
+            input: ''
+        };
+
+        this.setState({
+            cardResult,
+            input: ''
+        }, this.focus);
+    };
+
+    renderCardResult = () => {
+        const {cardResult} = this.state;
+        const {isCorrect} = cardResult;
+        return <div style={{margin: '10px'}}>
+            <form onSubmit={this.onClickCardResult}>
+                <div style={{padding: '5px', backgroundColor: isCorrect ? 'green' : 'red'}}>
+                    <p>{isCorrect ? 'Success' : 'Fail'}</p>
+                </div>
+                <p>Word: {cardResult.expectedCard.translation.val}</p>
+                <p>Expected: {fullForm(cardResult.expectedCard.word)}</p>
+                <p>Actual: {cardResult.actualValue}</p>
+                <button ref={ref => ref && ref.focus()}>Next</button>
+            </form>
+        </div>;
+    };
+
+    onClickCardResult = (event) => {
         event.preventDefault();
 
         const index = this.state.index + 1;
 
-        console.log('[obabichev] this.state.input', this.state.input);
-        const isCorrect = fullForm(word) === this.state.input;
-        console.log('[obabichev] isCorrct', isCorrect);
-
-        console.log('[obabichev] word.id', word.id);
-        console.log('[obabichev] this.props.learned', this.props.learned);
-
-        if (isCorrect && _.indexOf(this.props.learned, word.id) !== -1) {
-            console.log('[obabichev] SUCCESS');
-        }
-
-        this.props.onLearn(word, isCorrect);
-
         if (index >= this.props.cardsToLearn.length) {
-            console.log('[obabichev] ALLLLES');
             this.props.onFinish();
             return;
         }
 
         this.setState({
             index,
-            input: ''
-        });
+            cardResult: null
+        }, this.focus);
     };
+
+    focus = () => {
+        if (this.ref) {
+            this.ref.focus();
+        }
+    }
 }
