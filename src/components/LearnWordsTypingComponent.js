@@ -7,7 +7,6 @@ export class LearnWordsTypingComponent extends Component {
 
     state = {
         index: 0,
-        learned: [],
         input: '',
         cardResult: null
     };
@@ -26,8 +25,7 @@ export class LearnWordsTypingComponent extends Component {
         }
 
         return <div>
-            LearnWordsTypingComponent
-
+            <h2>Words typing</h2>
             {this.renderInputWord(card)}
         </div>;
     }
@@ -58,7 +56,7 @@ export class LearnWordsTypingComponent extends Component {
 
         const isCorrect = fullForm(card.word) === this.state.input;
 
-        this.props.onLearn(card.word, isCorrect);
+        this.props.onLearn(card, isCorrect);
 
         const cardResult = {
             isCorrect,

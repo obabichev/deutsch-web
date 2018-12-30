@@ -6,7 +6,8 @@ export const downloadWordProgresses = () => dispatch => {
         .then(wordProgresses => dispatch(wordProgressGetAction(wordProgresses)));
 };
 
-export const saveWordProgress = (word, learned) => dispatch => {
-    return postWordProgress(word.id, learned)
+export const saveWordProgress = (word, translation, learned) => dispatch => {
+    return postWordProgress(word.id, translation.id, learned)
         .then(wordProgress => dispatch(wordProgressItemAction(wordProgress)));
 };
+

@@ -14,7 +14,7 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = (dispatch, props) => ({
     downloadGlossary: (id) => dispatch(downloadGlossary(id)),
     downloadWordProgresses: () => dispatch(downloadWordProgresses()),
-    saveWordProgress: (word, learned) => dispatch(saveWordProgress(word, learned))
+    saveWordProgress: (word, translation, learned) => dispatch(saveWordProgress(word, translation, learned))
 });
 
 export const LearnWordsContainer = connect(mapStateToProps, mapDispatchToProps)(LearnWordsComponent);

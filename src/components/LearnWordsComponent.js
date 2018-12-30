@@ -77,12 +77,12 @@ export class LearnWordsComponent extends Component {
         })
     };
 
-    onLearn = (word, success) => {
+    onLearn = (card, success) => {
         const {firstLearned} = this.state;
-        const learnedBefore = _.indexOf(firstLearned, word.id) !== -1;
+        const learnedBefore = _.indexOf(firstLearned, card.word.id) !== -1;
         success = success && learnedBefore;
 
-        this.props.saveWordProgress(word, success);
+        this.props.saveWordProgress(card.word, card.translation, success);
     };
 
     onFinish = () => {

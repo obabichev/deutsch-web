@@ -9,6 +9,7 @@ import {RegisterContainer} from './containers/RegisterContainer';
 import {HomeContainer} from './containers/HomeContainer';
 import {GlossaryDetailsContainer} from './containers/GlossaryDetailsContainer';
 import {LearnWordsContainer} from './containers/LearnWordsContainer';
+import {RepeatWordsContainer} from './containers/RepeatWordsContainer';
 
 
 class App extends Component {
@@ -23,6 +24,7 @@ class App extends Component {
                     <PrivateRoute exact path="/" component={HomeContainer}/>
                     <PrivateRoute exact path="/glossary/:glossaryId/" component={GlossaryDetailsContainer}/>
                     <PrivateRoute exact path="/learn/glossary/:glossaryId" component={LearnWordsContainer}/>
+                    <PrivateRoute exact path="/repeat" component={RepeatWordsContainer}/>
                     <Route path="/login" component={LoginContainer}/>
                     <Route path="/register" component={RegisterContainer}/>
                 </div>
