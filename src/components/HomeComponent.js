@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {logout} from '../actions/thunk/auth.thunk.actions';
 import {GlossaryScreenContainer} from '../containers/GlossaryScreenContainer';
 import {history} from '../helpers/history';
 
@@ -8,8 +7,8 @@ export class HomeComponent extends Component {
     onLogout = event => {
         event.preventDefault();
 
-        const {dispatch} = this.props;
-        dispatch(logout());
+        const {logout} = this.props;
+        logout();
     };
 
     componentDidMount() {
