@@ -2,7 +2,11 @@ import {authConstants} from '../actions/auth.constants';
 
 const defaultState = {loggedIn: false, user: null};
 
-let user = JSON.parse(localStorage.getItem('user'));
+let user = null;
+try {
+    user = JSON.parse(localStorage.getItem('user'));
+} catch (err) {
+}
 const initialState = user ? {loggedIn: true, user} : defaultState;
 
 export const auth = (state = initialState, action = {}) => {

@@ -1,0 +1,108 @@
+.form-title-container {
+    margin-bottom: 15px;
+    text-align: center;
+    text-shadow: none;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.form-title-text {
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: -.5px;
+}
+
+.standard-input {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    background: #ffffff no-repeat right 8px center;
+    border: 1px solid #d1d5da;
+    box-shadow: inset 0 1px 2px rgba(27, 31, 35, .075);
+    color: #24292e;
+    line-height: 20px;
+    min-height: 34px;
+    outline: none;
+    padding: 6px 8px;
+    vertical-align: middle;
+    border-radius: 3px;
+    font-family: inherit;
+    overflow: visible;
+    margin: 5px 0 15px;
+    box-sizing: border-box;
+
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #24292e;
+    line-height: 1.5;
+}
+
+.green-button {
+    margin-top: 20px;
+    display: block;
+    text-align: center;
+    width: 100%;
+    background: #28a745 linear-gradient(-180deg, #34d058, #28a745 90%);
+    color: #ffffff;
+    border: 1px solid rgba(27, 31, 35, .2);
+    border-radius: .25em;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 12px;
+    vertical-align: middle;
+    white-space: nowrap;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.green-button:hover {
+    background: #24983f linear-gradient(-180deg, #30bf51, #259c41 90%);
+}
+
+.green-button:focus {
+    background: #1e7f35 linear-gradient(-180deg, #28a044, #1b712f 90%);
+}
+
+.login-inputs-container {
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: 1px solid #d8dee2;
+    font-size: 14px;
+    padding: 20px;
+    color: #24292e;
+    line-height: 1.5;
+}
+
+.login-form-container {
+    box-sizing: border-box;
+    display: block;
+    margin-top: 0;
+    color: #24292e;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.login-form-block {
+    margin: 0 auto;
+    width: 340px;
+
+}
+
+.register-link {
+    border: 1px solid #d8dee2;
+    border-radius: 5px;
+    padding: 15px 20px;
+    text-align: center;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+
+}
+
