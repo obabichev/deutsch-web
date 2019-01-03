@@ -1,6 +1,7 @@
-import * as authActions from '../auth.actions';
-import * as loadingActions from '../loading.actions';
+import * as authActions from './auth.actions';
+import * as loadingActions from '../../actions/loading.actions';
 import {history} from '../../helpers/history';
+import {errorAction} from '../../core/actions/error.actions';
 
 export const login = (email, password) => dispatch => {
     dispatch(loadingActions.loadingStartAction());
@@ -13,7 +14,12 @@ export const login = (email, password) => dispatch => {
         },
         body: JSON.stringify({email, password})
     })
-        .then(response => response.json())
+        .then(async response => {
+            if (!response.ok) {
+                throw await response.json();
+            }
+            return response.json();
+        })
         .then(data => {
             dispatch(loadingActions.loadingEndAction());
             if (data.errors) {
@@ -23,7 +29,11 @@ export const login = (email, password) => dispatch => {
                 localStorage.setItem('user', JSON.stringify(user));
                 history.push('/');
             }
-        });
+        })
+        .catch(err => {
+            dispatch(loadingActions.loadingEndAction());
+            dispatch(errorAction(err));
+        })
 };
 
 export const register = (user) => dispatch => {

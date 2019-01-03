@@ -1,4 +1,4 @@
-import {authConstants} from '../actions/auth.constants';
+import {authConstants} from '../auth/actions/auth.constants';
 
 const defaultState = {loggedIn: false, user: null};
 

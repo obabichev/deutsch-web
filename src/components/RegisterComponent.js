@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import * as authActions from '../actions/thunk/auth.thunk.actions';
+import * as authActions from '../auth/actions/auth.thunk.actions';
 
 export class RegisterComponent extends Component {
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import {LoginContainer} from './containers/LoginContainer';
+import {LoginContainer} from './auth/containers/LoginContainer';
 import {connect} from 'react-redux';
 import {Route, Router} from 'react-router-dom';
 import {history} from './helpers/history';
