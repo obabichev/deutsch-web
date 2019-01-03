@@ -89,3 +89,15 @@
 .register-green-button:focus {
     background: #1e7f35 linear-gradient(-180deg, #28a044, #1b712f 90%);
 }
+
+.register-login-link {
+    border: 1px solid #d8dee2;
+    border-radius: 5px;
+    padding: 15px 20px;
+    text-align: center;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    color: #24292e;
+    font-size: 14px;
+    line-height: 1.5;
+}
