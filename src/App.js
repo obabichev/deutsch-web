@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {Route, Router} from 'react-router-dom';
 import {history} from './helpers/history';
 import {PrivateRoute} from './components/PrivatRouter';
-import {RegisterContainer} from './containers/RegisterContainer';
+import {RegisterContainer} from './auth/containers/RegisterContainer';
 import {HomeContainer} from './containers/HomeContainer';
 import {GlossaryDetailsContainer} from './containers/GlossaryDetailsContainer';
 import {LearnWordsContainer} from './containers/LearnWordsContainer';

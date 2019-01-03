@@ -33,7 +33,7 @@ export const login = (email, password) => dispatch => {
         .catch(err => {
             dispatch(loadingActions.loadingEndAction());
             dispatch(errorAction(err));
-        })
+        });
 };
 
 export const register = (user) => dispatch => {
@@ -46,7 +46,12 @@ export const register = (user) => dispatch => {
         },
         body: JSON.stringify(user)
     })
-        .then(response => response.json())
+        .then(async response => {
+            if (!response.ok) {
+                throw await response.json();
+            }
+            return response.json();
+        })
         .then((data) => {
             dispatch(loadingActions.loadingEndAction());
             if (data.errors) {
@@ -56,6 +61,10 @@ export const register = (user) => dispatch => {
                 localStorage.setItem('user', JSON.stringify(user));
                 history.push('/');
             }
+        })
+        .catch(err => {
+            dispatch(loadingActions.loadingEndAction());
+            dispatch(errorAction(err));
         });
 };
 
