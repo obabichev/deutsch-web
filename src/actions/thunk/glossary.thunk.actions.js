@@ -47,7 +47,7 @@ export const removeGlossary = (glossaryId) => dispatch => {
         .then(
             () => {
                 dispatch(glossaryDeletedAction(glossaryId));
-                history.goBack();
+                // history.goBack();
             }
         );
 };

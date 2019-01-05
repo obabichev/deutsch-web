@@ -1,0 +1,41 @@
+.core-button {
+    /*margin-top: 20px;*/
+    display: block;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    border: 1px solid rgba(27, 31, 35, .2);
+    border-radius: .25em;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 5px 10px;
+    vertical-align: middle;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.core-button-green {
+    background: #28a745 linear-gradient(-180deg, #34d058, #28a745 90%);
+}
+
+.core-button-green:hover {
+    background: #24983f linear-gradient(-180deg, #30bf51, #259c41 90%);
+}
+
+.core-button-green:focus {
+    background: #1e7f35 linear-gradient(-180deg, #28a044, #1b712f 90%);
+}
+
+.core-button-blue {
+    background: #3680be linear-gradient(-180deg, #3680be, #3680be 90%);
+}
+
+.core-button-blue:hover {
+    background: #2f6fa5 linear-gradient(-180deg, #2f6fa5, #2f6fa5 90%);
+}
+
+.core-button-blue:focus {
+    background: #285e8b linear-gradient(-180deg, #275c89, #265985 90%);
+}

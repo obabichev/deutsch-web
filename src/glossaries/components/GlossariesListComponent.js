@@ -21,8 +21,7 @@ export class GlossariesListComponent extends Component {
         </div>;
     }
 
-    onGlossaryClick = glossaryId => (event) => {
-        event.preventDefault();
+    onGlossaryClick = glossaryId => () => {
         history.push(`/glossary/${glossaryId}/`);
     };
 
@@ -30,9 +29,23 @@ export class GlossariesListComponent extends Component {
         return this.props.glossaries.map(this.renderGlossary);
     };
 
+    onDeleteClick = (glossaryId) => () => {
+        console.log('[obabichev] DELETE', glossaryId);
+        this.props.removeGlossary(glossaryId);
+    };
+
+    onLearnClick = (glossaryId) => () => {
+        history.push(`/learn/glossary/${glossaryId}`);
+    };
+
     renderGlossary = (glossary) => {
         return <GlossaryCardComponent
-            title={glossary.title}/>
+            key={glossary.id}
+            title={glossary.title}
+            count={glossary.cards.length}
+            onClick={this.onGlossaryClick(glossary.id)}
+            onDeleteClick={this.onDeleteClick(glossary.id)}
+            onLearnClick={this.onLearnClick(glossary.id)}/>
         // return <div style={{backgroundColor: 'lightgray', margin: '10px', padding: '5px'}}
         //             key={glossary.id}
         //             onClick={this.onGlossaryClick(glossary.id)}>
