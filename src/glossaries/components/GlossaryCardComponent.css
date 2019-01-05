@@ -1,0 +1,170 @@
+.gloss-card {
+    margin-right: 10px;
+    display: inline-block;
+    float: left;
+    position: relative;
+    vertical-align: top;
+    width: 180px;
+    height: 240px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .12), 0 0 1px 0 rgba(0, 0, 0, .12);
+    border-radius: 8px;
+    background-color: #fff;
+    color: #434343;
+    margin-bottom: 35px;
+    overflow: hidden;
+    text-decoration: none;
+    outline: 0;
+    cursor: pointer;
+    border: 0;
+    font-size: 100%;
+}
+
+.gloss-card-remove {
+    display: block;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    color: black;
+    transition: opacity .1s ease-out;
+    opacity: 0;
+    z-index: 5;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    border: 0;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.gloss-card:hover .gloss-card-remove {
+    opacity: 1;
+}
+
+.tooltip {
+}
+
+.tooltiptext {
+    visibility: hidden;
+    width: 138px;
+    background-color: #434343;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 1;
+    overflow: visible;
+
+    top: -5px;
+    right: 105%;
+
+}
+
+.gloss-card-remove:hover .tooltiptext {
+    visibility: visible;
+}
+
+.gloss-card-present {
+    display: block;
+    height: 160px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 4;
+    transition: opacity .1s ease-out;
+    color: #fff;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    background-color: lightgreen;
+    overflow: hidden;
+
+}
+
+.gloss-card-content {
+    position: absolute;
+    right: 0;
+    top: 160px;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    transition: all .2s ease;
+    background-color: #fff;
+    padding: 0 15px;
+    border-radius: 0 0 2px 2px;
+    height: 80px;
+    z-index: 5;
+    transform: translateZ(0);
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    margin: 0;
+    display: block;
+    cursor: pointer;
+}
+
+.gloss-card-content-title {
+    margin-top: 5px;
+    padding: 6px 0 3px;
+    font-size: 17px;
+    line-height: 1;
+    display: table;
+    width: 100%;
+    height: 44px;
+    vertical-align: baseline;
+    border: 0;
+    text-align: center;
+}
+
+.gloss-card-content-amount {
+    visibility: visible;
+    text-align: right;
+    font-size: 14px;
+    color: #999;
+}
+
+.gloss-card-content-learn {
+    visibility: hidden;
+}
+
+.gloss-card-content-learn-button {
+    display: block;
+    width: 100%;
+    padding: 11px 0 9px;
+    box-shadow: 0 2px #265985;
+    background: #3680be;
+    color: #fff;
+    min-width: 0;
+    border-radius: 2px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 11px;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    text-shadow: none;
+    transition: top .1s ease-out;
+    line-height: 1;
+
+}
+
+.gloss-card:hover .gloss-card-content {
+    top: 140px;
+    height: 100px;
+}
+
+.gloss-card:hover .gloss-card-content-amount {
+    visibility: hidden;
+    height: 0;
+}
+
+.gloss-card:hover .gloss-card-content-learn {
+    visibility: visible;
+}

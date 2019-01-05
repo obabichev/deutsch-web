@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {GlossaryScreenContainer} from '../containers/GlossaryScreenContainer';
+import {GlossariesListContainer} from '../glossaries/containers/GlossariesListContainer';
 import {history} from '../helpers/history';
 
 export class HomeComponent extends Component {
@@ -32,7 +32,7 @@ export class HomeComponent extends Component {
                 {repeatWordsCount > 0 && <button onClick={this.onRepeatClick}>Repeat</button>}
             </div>
 
-            <GlossaryScreenContainer/>
+            <GlossariesListContainer/>
         </div>
     }
 }

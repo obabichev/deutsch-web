@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {history} from '../helpers/history';
+import {history} from '../../helpers/history';
+import {GlossaryCardComponent} from './GlossaryCardComponent';
 
-export class GlossaryScreenComponent extends Component {
+export class GlossariesListComponent extends Component {
 
     componentDidMount() {
         const {updateGlossaries} = this.props;
@@ -30,11 +31,13 @@ export class GlossaryScreenComponent extends Component {
     };
 
     renderGlossary = (glossary) => {
-        return <div style={{backgroundColor: 'lightgray', margin: '10px', padding: '5px'}}
-                    key={glossary.id}
-                    onClick={this.onGlossaryClick(glossary.id)}>
-            <p>{glossary.title}</p>
-            <p>Terms: {glossary.cards.length}</p>
-        </div>;
+        return <GlossaryCardComponent
+            title={glossary.title}/>
+        // return <div style={{backgroundColor: 'lightgray', margin: '10px', padding: '5px'}}
+        //             key={glossary.id}
+        //             onClick={this.onGlossaryClick(glossary.id)}>
+        //     <p>{glossary.title}</p>
+        //     <p>Terms: {glossary.cards.length}</p>
+        // </div>;
     };
 }

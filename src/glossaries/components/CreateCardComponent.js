@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Autocomplete from 'react-autocomplete';
-import {searchWords} from '../service/word';
-import {searchTranslation} from '../service/translation';
+import {searchWords} from '../../service/word';
+import {searchTranslation} from '../../service/translation';
 
 export class CreateCardComponent extends Component {
 
