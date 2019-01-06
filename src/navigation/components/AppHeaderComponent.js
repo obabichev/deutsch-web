@@ -15,8 +15,13 @@ export class AppHeaderComponent extends Component {
         this.props.logout();
     };
 
+    onRepeatClick = (event) => {
+        history.push('/repeat');
+    };
+
     render() {
         const {user} = this.props;
+
         if (!user) {
             return <></>;
         }
@@ -25,9 +30,7 @@ export class AppHeaderComponent extends Component {
                 <h2 className="app-header-logo-text" onClick={this.onHomeClick}>Dapp</h2>
             </div>
             <div className="app-header-delimiter"/>
-            <div className="app-header-repeat app-header-element">
-                <Icon icon="alarm-clock"/>
-            </div>
+            {this.renderRepeatWords()}
             <div className="app-header-user app-header-element">
                 {user.name}
             </div>
@@ -35,6 +38,22 @@ export class AppHeaderComponent extends Component {
                  onClick={this.onLogoutClick}>
                 <Icon icon="exit"/>
             </div>
+        </div>;
+    }
+
+    renderRepeatWords = () => {
+        const {repeatWordsCount} = this.props;
+
+        const displayRepeatWordsCount = repeatWordsCount > 99 ? 99 : repeatWordsCount;
+
+        if (!repeatWordsCount) {
+            return null;
+        }
+
+        return <div className="app-header-repeat app-header-element"
+                    onClick={this.onRepeatClick}>
+            <Icon icon="alarm-clock"/>
+            <span className="app-header-repeat-count">{displayRepeatWordsCount}</span>
         </div>;
     }
 

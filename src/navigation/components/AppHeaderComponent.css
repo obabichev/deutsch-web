@@ -31,7 +31,21 @@
 }
 
 .app-header-repeat {
+    position: relative;
     cursor: pointer;
+}
+
+.app-header-repeat-count {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 16px;
+    height:16px;
+    background-color: red;
+    border-radius: 50%;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
 }
 
 .app-header-user {
