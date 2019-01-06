@@ -10,6 +10,8 @@ import {HomeContainer} from './containers/HomeContainer';
 import {GlossaryDetailsContainer} from './glossaries/containers/GlossaryDetailsContainer';
 import {LearnWordsContainer} from './containers/LearnWordsContainer';
 import {RepeatWordsContainer} from './containers/RepeatWordsContainer';
+import {AppHeaderContainer} from './navigation/containers/AppHeaderContainer';
+import {userSelector} from './selectors/auth.selectors';
 
 
 class App extends Component {
@@ -21,22 +23,37 @@ class App extends Component {
             }
             <Router history={history}>
                 <div>
+                    {this.renderHeader()}
                     <PrivateRoute exact path="/" component={HomeContainer}/>
                     <PrivateRoute exact path="/glossary/:glossaryId/" component={GlossaryDetailsContainer}/>
                     <PrivateRoute exact path="/learn/glossary/:glossaryId" component={LearnWordsContainer}/>
                     <PrivateRoute exact path="/repeat" component={RepeatWordsContainer}/>
-                    <Route path="/login" component={LoginContainer}/>
-                    <Route path="/register" component={RegisterContainer}/>
+                    {this.renderAuthRouters()}
                 </div>
             </Router>
         </div>;
     }
+
+    renderHeader = () => {
+        return <AppHeaderContainer/>;
+    };
+
+    renderAuthRouters = () => {
+        if (this.props.user) {
+            return null;
+        }
+        return <>
+        <Route path="/login" component={LoginContainer}/>
+        <Route path="/register" component={RegisterContainer}/>
+        </>;
+    };
 }
 
 function mapStateToProps(state) {
     const {alert} = state;
     return {
-        alert
+        alert,
+        user: userSelector(state)
     };
 }
 
