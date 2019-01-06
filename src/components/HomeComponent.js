@@ -4,13 +4,6 @@ import {history} from '../helpers/history';
 
 export class HomeComponent extends Component {
 
-    onLogout = event => {
-        event.preventDefault();
-
-        const {logout} = this.props;
-        logout();
-    };
-
     componentDidMount() {
         this.props.getWordsToRepeat();
     }
@@ -24,9 +17,6 @@ export class HomeComponent extends Component {
         const {repeatWordsCount} = this.props;
 
         return <div>
-            <p>Home</p>
-            <button className="btn btn-primary" onClick={this.onLogout}>Logout</button>
-
             <div>
                 <p>Words to repeat: {repeatWordsCount}</p>
                 {repeatWordsCount > 0 && <button onClick={this.onRepeatClick}>Repeat</button>}

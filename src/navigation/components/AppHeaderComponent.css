@@ -30,8 +30,19 @@
     flex: 1;
 }
 
+.app-header-repeat {
+    cursor: pointer;
+}
+
 .app-header-user {
     position: relative;
-    margin-left: 24px;
     display: block;
+}
+
+.app-header-logout {
+    cursor: pointer;
+}
+
+.app-header-element {
+    margin-left: 24px;
 }
