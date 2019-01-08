@@ -1,0 +1,31 @@
+.glossaries-container {
+    margin: 16px 64px;
+}
+
+.glossaries-list-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: .4px;
+    color: #37383c;
+    text-transform: uppercase;
+}
+
+.glossaries-create-button {
+    width: 150px;
+}
+
+.glossaries-header-container {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 48px;
+}
+
+.glossaries-header-delimiter {
+    flex: 1
+}
+
+.glossaries-content-container {
+    margin-top: 16px;
+}
