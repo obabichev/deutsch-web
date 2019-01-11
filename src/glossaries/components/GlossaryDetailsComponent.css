@@ -1,0 +1,121 @@
+.glossaries-details-control-container {
+    max-width: 700px;
+    padding-right: 16px;
+    display: flex;
+    flex-direction: row;
+    height: 44px;
+    background-color: #dcdcf0;
+    border-radius: 6px 6px 0 0;
+    align-items: center;
+}
+
+.glossaries-details-card-title {
+    padding-right: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #37383c;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.glossaries-details-card-delimiter {
+    flex: 1;
+}
+
+.glossaries-details-control-icon-container {
+    width: 24px;
+    height: 24px;
+    margin: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.glossaries-details-card-container {
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 700px;
+    padding-left: 16px;
+    border-bottom: 1px dotted;
+    border-color: #d8dee2;
+}
+
+.glossaries-details-card-word-container {
+    color: #333;
+    font-size: 15px;
+    /*cursor: pointer;*/
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    margin-right: 40px;
+    flex: 1;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.glossaries-details-card-word-value {
+    color: #3f69a9;
+    font-weight: 500;
+
+}
+
+.glossaries-details-card-delimiter {
+    flex: 1
+}
+
+.glossaries-details-card-button-container {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+}
+
+.glossaries-details-card-button-remove {
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.glossaries-details-card-container:hover .glossaries-details-card-button-remove {
+    visibility: visible;
+}
+
+.glossaries-details-progress-container {
+    background-color: #dcdcf0;
+    max-width: 700px;
+    padding: 4px 8px;
+    display: flex;
+}
+
+.glossaries-details-progress {
+    margin: 0;
+    flex: 1;
+}
+
+.glossaries-details-progress[value] {
+    -webkit-appearance: none;
+
+    width: 250px;
+    height: 8px;
+    border-radius: 4px;
+}
+
+.glossaries-details-progress[value]::-webkit-progress-bar {
+    background-color: rgba(255, 0, 0, 0.67);
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress[value]::-webkit-progress-value {
+    background-color: #28c38a;
+
+    border-radius: 2px;
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+

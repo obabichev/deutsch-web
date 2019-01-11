@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import {CreateCardComponent} from './CreateCardComponent';
-import {Link} from 'react-router-dom';
 import _ from 'lodash';
+import './GlossaryDetailsComponent.css';
+import {Icon} from '../../core/components/Icon';
+import {Button} from '../../core/components/Button';
+import {history} from '../../helpers/history';
 
 export class GlossaryDetailsComponent extends Component {
 
@@ -28,21 +31,22 @@ export class GlossaryDetailsComponent extends Component {
     }
 
     renderGlossary = (glossary) => {
-        const {wordProgresses} = this.props;
         const total = glossary.cards.length;
         const learned = this.props.wordProgresses ? this.props.wordProgresses.filter(wp => wp.learned).length : 0;
 
         return <div>
+
             {this.renderTitle()}
-            <p>Learned {learned}/{total}</p>
             <div onClick={() => this.props.removeGlossary(glossary.id)}
                  style={{backgroundColor: 'red', margin: '10px', padding: '5px', width: "100px"}}>
                 DELETE
             </div>
 
-            {(wordProgresses && learned < total) && <div style={{margin: '10px'}}>
-                <Link to={`/learn/glossary/${glossary.id}`} className="btn btn-link">Learn</Link>
-            </div>}
+            {this.rencerControlBar()}
+
+            <div className="glossaries-details-progress-container">
+                <progress className="glossaries-details-progress" max={total} value={learned}/>
+            </div>
 
             <div>
                 {glossary.cards.map(this.renderCard)}
@@ -55,6 +59,50 @@ export class GlossaryDetailsComponent extends Component {
 
             <div style={{height: '200px'}}></div>
         </div>;
+    };
+
+    rencerControlBar = () => {
+        const {glossary} = this.props;
+
+        const {wordProgresses} = this.props;
+        const total = glossary.cards.length;
+        const learned = this.props.wordProgresses ? this.props.wordProgresses.filter(wp => wp.learned).length : 0;
+
+        return <div className="glossaries-details-control-container">
+            <div className="glossaries-details-control-icon-container"
+                 onClick={this.onCloseClick}>
+                <Icon icon="multiply"/>
+            </div>
+            <div className="glossaries-details-control-icon-container"
+                 onClick={this.onRemoveGlossaryClick}>
+                <Icon icon="garbage"/>
+            </div>
+            <div>
+                <span className="glossaries-details-card-title">{glossary.title}</span>
+            </div>
+            <div className="glossaries-details-card-delimiter"/>
+            {(wordProgresses && learned < total) && <div>
+                <Button title="Learn" blue
+                        onClick={this.onLearnClick}/>
+            </div>}
+        </div>;
+    };
+
+    onRemoveGlossaryClick = () => {
+        const {glossary} = this.props;
+
+        this.props.removeGlossary(glossary.id);
+        history.goBack();
+    };
+
+    onLearnClick = () => {
+        const {glossary} = this.props;
+
+        history.push(`/learn/glossary/${glossary.id}`);
+    };
+
+    onCloseClick = () => {
+        history.goBack();
     };
 
     renderTitle = () => {
@@ -122,18 +170,25 @@ export class GlossaryDetailsComponent extends Component {
 
         const wordProgress = _.find(wordProgresses, wordProgress => wordProgress.word_id === card.word.id);
 
-        return <div style={{"flexFlow": "row wrap", display: "flex"}}
-                    key={card.id}>
-            <div style={{backgroundColor: 'lightgray', margin: '10px', padding: '5px', width: "300px"}}>
-                <p>{card.word.val}</p>
-                <p>{card.translation.val}</p>
-                <p>{(wordProgress && wordProgress.learned) ? 'Learned' : 'Not learned' }</p>
+        return <div className="glossaries-details-card-container">
+            <div className="glossaries-details-card-word-container">
+                <b className="glossaries-details-card-word-value">{card.word.val}</b> - {card.translation.val}
             </div>
-            <div style={{backgroundColor: 'red', margin: '10px', padding: '5px', width: "50px"}}
+            <div className="glossaries-details-card-button-container">
+                {this.renderWordStatusIcon(wordProgress)}
+            </div>
+            <div className="glossaries-details-card-button-container glossaries-details-card-button-remove"
                  onClick={this.onDeleteClick(card.id)}>
-                DEL
+                <Icon icon="garbage"/>
             </div>
-        </div>
+        </div>;
+    };
+
+    renderWordStatusIcon = (wordProgress) => {
+        if (wordProgress && wordProgress.learned) {
+            return <Icon icon="success"/>;
+        }
+        return <Icon icon="minus"/>;
     };
 
     renderAddButton = () => {
