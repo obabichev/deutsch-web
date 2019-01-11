@@ -1,3 +1,7 @@
+.glossary-details-container {
+    padding: 10px 20px;
+}
+
 .glossaries-details-control-container {
     max-width: 700px;
     padding-right: 16px;
@@ -10,7 +14,7 @@
 }
 
 .glossaries-details-card-title {
-    padding-right: 20px;
+    padding-right: 4px;
     font-size: 20px;
     font-weight: 400;
     color: #37383c;
@@ -81,6 +85,22 @@
     cursor: pointer;
 }
 
+.glossaries-details-card-title-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 16px;
+    cursor: pointer;
+}
+
+.glossaries-details-title-edit-container {
+    visibility: hidden;
+}
+
+.glossaries-details-card-title-container:hover .glossaries-details-title-edit-container {
+    visibility: visible;
+}
+
 .glossaries-details-card-container:hover .glossaries-details-card-button-remove {
     visibility: visible;
 }
@@ -119,3 +139,41 @@ progress[value]::-webkit-progress-value {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
 }
 
+.glossaries-details-title-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.glossaries-details-title-input {
+    width: 160px;
+    height: 24px;
+    line-height: normal;
+    box-sizing: border-box;
+    border: 1px solid;
+    border-color: #979797 #DDD #DEDEDE;
+    border-radius: 2px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#F5F5F5), to(#FDFDFD));
+    font-size: 13px;
+    box-shadow: 0 1px #D5D5D5 inset;
+    font-family: "Open Sans", OpenSans, Arial, sans-serif;
+    color: #333;
+    outline: none;
+}
+
+.glossaries-details-title-save-button {
+    margin: 0 0 0 5px;
+    height: 24px;
+    background: #F5F5F5 linear-gradient(to bottom, #f5f5f5, #E7E7E7);
+    box-shadow: 0 1px #FFF inset, 1px 0 #F7F7F7 inset, -1px 0 #F7F7F7 inset, 0 -1px #F1F1F1 inset, 0 1px #E6E6E6;
+    color: #333;
+    text-shadow: 0 1px #F0F0F0;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+    border: 1px solid #DDD;
+    border-bottom-color: #AAA;
+    border-radius: 2px 2px 3px 3px;
+    text-align: center;
+
+}

@@ -22,7 +22,7 @@ export class GlossaryDetailsComponent extends Component {
     }
 
     render() {
-        const {glossary, wordProgresses} = this.props;
+        const {glossary} = this.props;
         if (glossary) {
             return this.renderGlossary(glossary);
         }
@@ -34,15 +34,9 @@ export class GlossaryDetailsComponent extends Component {
         const total = glossary.cards.length;
         const learned = this.props.wordProgresses ? this.props.wordProgresses.filter(wp => wp.learned).length : 0;
 
-        return <div>
+        return <div className="glossary-details-container">
 
-            {this.renderTitle()}
-            <div onClick={() => this.props.removeGlossary(glossary.id)}
-                 style={{backgroundColor: 'red', margin: '10px', padding: '5px', width: "100px"}}>
-                DELETE
-            </div>
-
-            {this.rencerControlBar()}
+            {this.renderControlBar()}
 
             <div className="glossaries-details-progress-container">
                 <progress className="glossaries-details-progress" max={total} value={learned}/>
@@ -57,11 +51,11 @@ export class GlossaryDetailsComponent extends Component {
                     onSubmit={this.onCardCreate}/>
                 : this.renderAddButton()}
 
-            <div style={{height: '200px'}}></div>
+            <div style={{height: '200px'}}/>
         </div>;
     };
 
-    rencerControlBar = () => {
+    renderControlBar = () => {
         const {glossary} = this.props;
 
         const {wordProgresses} = this.props;
@@ -71,15 +65,13 @@ export class GlossaryDetailsComponent extends Component {
         return <div className="glossaries-details-control-container">
             <div className="glossaries-details-control-icon-container"
                  onClick={this.onCloseClick}>
-                <Icon icon="multiply"/>
+                <Icon width="16px" height="16px" icon="back"/>
             </div>
             <div className="glossaries-details-control-icon-container"
                  onClick={this.onRemoveGlossaryClick}>
-                <Icon icon="garbage"/>
+                <Icon width="16px" height="16px" icon="garbage"/>
             </div>
-            <div>
-                <span className="glossaries-details-card-title">{glossary.title}</span>
-            </div>
+            {this.renderTitle()}
             <div className="glossaries-details-card-delimiter"/>
             {(wordProgresses && learned < total) && <div>
                 <Button title="Learn" blue
@@ -107,6 +99,33 @@ export class GlossaryDetailsComponent extends Component {
 
     renderTitle = () => {
         const {glossary} = this.props;
+
+        if (this.state.editingTitle) {
+            return <div>
+                <form name="form"
+                      className="glossaries-details-title-form"
+                      onSubmit={this.onTitleSubmit}>
+                    <input className="glossaries-details-title-input"
+                           value={this.state.titleInput}
+                           onChange={this.onTitleChange}
+                           ref={(input) => this.titleInputRef = input}/>
+                    {/*<Button title="Save" green/>*/}
+                    <button className="glossaries-details-title-save-button">
+                        Save
+                    </button>
+                </form>
+            </div>;
+        }
+
+        return <div className="glossaries-details-card-title-container"
+                    onClick={this.onTitleClick}>
+            <span className="glossaries-details-card-title">{glossary.title}</span>
+            <div className="glossaries-details-title-edit-container">
+                <Icon icon="edit" width="16px" height="16px"/>
+            </div>
+        </div>;
+
+
         if (this.state.editingTitle) {
             return <div style={{margin: '10px', padding: '5px'}}>
                 <form name="form"
@@ -179,16 +198,16 @@ export class GlossaryDetailsComponent extends Component {
             </div>
             <div className="glossaries-details-card-button-container glossaries-details-card-button-remove"
                  onClick={this.onDeleteClick(card.id)}>
-                <Icon icon="garbage"/>
+                <Icon width="16px" height="16px" icon="garbage"/>
             </div>
         </div>;
     };
 
     renderWordStatusIcon = (wordProgress) => {
         if (wordProgress && wordProgress.learned) {
-            return <Icon icon="success"/>;
+            return <Icon width="16px" height="16px" icon="success"/>;
         }
-        return <Icon icon="minus"/>;
+        return <Icon width="16px" height="16px" icon="minus"/>;
     };
 
     renderAddButton = () => {

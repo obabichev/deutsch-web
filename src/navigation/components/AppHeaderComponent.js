@@ -36,7 +36,7 @@ export class AppHeaderComponent extends Component {
             </div>
             <div className="app-header-logout app-header-element"
                  onClick={this.onLogoutClick}>
-                <Icon icon="exit"/>
+                <Icon width="32px" height="32px" icon="exit"/>
             </div>
         </div>;
     }
@@ -52,7 +52,7 @@ export class AppHeaderComponent extends Component {
 
         return <div className="app-header-repeat app-header-element"
                     onClick={this.onRepeatClick}>
-            <Icon icon="alarm-clock"/>
+            <Icon width="32px" height="32px" icon="alarm-clock"/>
             <span className="app-header-repeat-count">{displayRepeatWordsCount}</span>
         </div>;
     }
