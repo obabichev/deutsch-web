@@ -1,5 +1,7 @@
 .glossary-details-container {
     padding: 10px 20px;
+    margin: auto;
+    width: 700px;
 }
 
 .glossaries-details-control-container {
@@ -176,4 +178,9 @@ progress[value]::-webkit-progress-value {
     border-radius: 2px 2px 3px 3px;
     text-align: center;
 
+}
+
+.glossaries-details-control-button-container {
+    margin-left: 5px;
+    margin-right: 5px;
 }

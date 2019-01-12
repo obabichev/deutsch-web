@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Autocomplete from 'react-autocomplete';
 import {searchWords} from '../../service/word';
 import {searchTranslation} from '../../service/translation';
+import './CreateCardComponent.css';
+import {Button} from '../../core/components/Button';
 
 export class CreateCardComponent extends Component {
 
@@ -104,43 +106,59 @@ export class CreateCardComponent extends Component {
 
     render() {
         return <div style={{margin: '10px'}}>
-            <form name="form" onSubmit={this.onSubmit}>
+            <form name="form" onSubmit={this.onSubmit}
+                  className="create-card-form">
                 {this.renderWordSearch()}
                 {this.state.word && this.renderTranslationSearch()}
 
-                {this.state.word && this.state.translation && <button className="btn btn-primary">Add</button>}
-
+                <div>
+                    {this.state.word && this.state.translation && <Button title="Save" green/>}
+                </div>
             </form>
         </div>;
     }
 
     renderWordSearch = () => {
-        return <Autocomplete
-            ref={(input) => this.wordInputRef = input}
-            getItemValue={(item) => item.val}
-            renderItem={(item, isHighlighted) =>
-                <div style={{padding: '5px', background: isHighlighted ? 'lightgray' : 'white'}} key={item.id}>
-                    {item.val}
-                </div>
-            }
-            value={this.state.wordInput}
-            onChange={this.onWordChange}
-            onSelect={this.onWordSelect}
-            items={this.state.wordSearch}/>;
+        return <div className="create-card-input-container">
+            <label
+                className="create-card-input-label">
+                Word
+            </label>
+            <Autocomplete
+                renderInput={(props) => <input className="create-card-input" {...props} />}
+                ref={(input) => this.wordInputRef = input}
+                getItemValue={(item) => item.val}
+                renderItem={(item, isHighlighted) =>
+                    <div style={{padding: '5px', background: isHighlighted ? 'lightgray' : 'white'}} key={item.id}>
+                        {item.val}
+                    </div>
+                }
+                value={this.state.wordInput}
+                onChange={this.onWordChange}
+                onSelect={this.onWordSelect}
+                items={this.state.wordSearch}/>
+        </div>
     };
 
     renderTranslationSearch = () => {
-        return <Autocomplete
-            ref={(input) => this.translationInputRef = input}
-            getItemValue={(item) => item.val}
-            renderItem={(item, isHighlighted) =>
-                <div style={{padding: '5px', background: isHighlighted ? 'lightgray' : 'white'}} key={item.id}>
-                    {item.val}
-                </div>
-            }
-            value={this.state.translationInput}
-            onChange={this.onTranslationChange}
-            onSelect={this.onTranslationSelect}
-            items={this.state.translationSearch}/>;
+        return <div className="create-card-input-container">
+            <label
+                className="create-card-input-label">
+                Translation
+            </label>
+            <Autocomplete
+                ref={(input) => this.translationInputRef = input}
+                renderInput={(props) => <input className="create-card-input" {...props} />}
+                getItemValue={(item) => item.val}
+                renderItem={(item, isHighlighted) =>
+                    <div style={{padding: '5px', background: isHighlighted ? 'lightgray' : 'white'}} key={item.id}>
+                        {item.val}
+                    </div>
+                }
+                value={this.state.translationInput}
+                onChange={this.onTranslationChange}
+                onSelect={this.onTranslationSelect}
+                items={this.state.translationSearch}/>
+        </div>
     }
 }

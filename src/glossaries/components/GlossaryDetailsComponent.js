@@ -34,6 +34,8 @@ export class GlossaryDetailsComponent extends Component {
         const total = glossary.cards.length;
         const learned = this.props.wordProgresses ? this.props.wordProgresses.filter(wp => wp.learned).length : 0;
 
+        const sortedCards = [...glossary.cards].sort(this.sortCards);
+
         return <div className="glossary-details-container">
 
             {this.renderControlBar()}
@@ -42,17 +44,22 @@ export class GlossaryDetailsComponent extends Component {
                 <progress className="glossaries-details-progress" max={total} value={learned}/>
             </div>
 
-            <div>
-                {glossary.cards.map(this.renderCard)}
-            </div>
-
             {this.state.addingCard
-                ? <CreateCardComponent
-                    onSubmit={this.onCardCreate}/>
-                : this.renderAddButton()}
+            && <CreateCardComponent
+                onSubmit={this.onCardCreate}/>}
+
+            <div>
+                {sortedCards.map(this.renderCard)}
+            </div>
 
             <div style={{height: '200px'}}/>
         </div>;
+    };
+
+    sortCards = (first, second) => {
+        const firstDate = new Date(first.updated_at);
+        const secondDate = new Date(second.updated_at);
+        return firstDate > secondDate ? -1 : firstDate < secondDate ? 1 : 0;
     };
 
     renderControlBar = () => {
@@ -73,7 +80,11 @@ export class GlossaryDetailsComponent extends Component {
             </div>
             {this.renderTitle()}
             <div className="glossaries-details-card-delimiter"/>
-            {(wordProgresses && learned < total) && <div>
+            {!this.state.addingCard && <div className="glossaries-details-control-button-container">
+                <Button title="Add card" blue
+                        onClick={this.onAddClick}/>
+            </div>}
+            {(wordProgresses && learned < total) && <div className="glossaries-details-control-button-container">
                 <Button title="Learn" blue
                         onClick={this.onLearnClick}/>
             </div>}
@@ -177,8 +188,10 @@ export class GlossaryDetailsComponent extends Component {
     };
 
     onCardCreate = (word, translation) => {
-
         const {addCardToGlossary, glossary} = this.props;
+        if (!word || !translation) {
+            return;
+        }
 
         addCardToGlossary(glossary.id, word.id, translation.id);
         this.setState({addingCard: false});
@@ -189,7 +202,8 @@ export class GlossaryDetailsComponent extends Component {
 
         const wordProgress = _.find(wordProgresses, wordProgress => wordProgress.word_id === card.word.id);
 
-        return <div className="glossaries-details-card-container">
+        return <div key={card.id}
+                    className="glossaries-details-card-container">
             <div className="glossaries-details-card-word-container">
                 <b className="glossaries-details-card-word-value">{card.word.val}</b> - {card.translation.val}
             </div>
@@ -208,13 +222,6 @@ export class GlossaryDetailsComponent extends Component {
             return <Icon width="16px" height="16px" icon="success"/>;
         }
         return <Icon width="16px" height="16px" icon="minus"/>;
-    };
-
-    renderAddButton = () => {
-        return <div style={{margin: 10, padding: 5, backgroundColor: 'lightgray'}}
-                    onClick={this.onAddClick}>
-            Add
-        </div>
     };
 
     onAddClick = () => {
