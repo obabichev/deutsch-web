@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {RepeatWordsComponent} from '../components/RepeatWordsComponent';
-import {repeatWordsSimpleSelector} from '../selectors/repeatWords.selectors';
-import {repeatWordAction} from '../actions/thunk/repeatWords.thunk.action';
+import {repeatWordsSimpleSelector} from '../../selectors/repeatWords.selectors';
+import {repeatWordAction} from '../../actions/thunk/repeatWords.thunk.action';
 
 const mapStateToProps = (state) => ({
     repeatWords: repeatWordsSimpleSelector(state)

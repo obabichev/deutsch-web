@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import _ from 'lodash';
 import {ChooseWordComponent} from './ChooseWordComponent';
 import {LearnWordsTypingComponent} from './LearnWordsTypingComponent';
-import {history} from '../helpers/history';
+import {history} from '../../helpers/history';
 
 export class LearnWordsComponent extends Component {
 

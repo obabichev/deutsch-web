@@ -8,8 +8,8 @@ import {PrivateRoute} from './components/PrivatRouter';
 import {RegisterContainer} from './auth/containers/RegisterContainer';
 import {HomeContainer} from './containers/HomeContainer';
 import {GlossaryDetailsContainer} from './glossaries/containers/GlossaryDetailsContainer';
-import {LearnWordsContainer} from './containers/LearnWordsContainer';
-import {RepeatWordsContainer} from './containers/RepeatWordsContainer';
+import {LearnWordsContainer} from './learning/containers/LearnWordsContainer';
+import {RepeatWordsContainer} from './learning/containers/RepeatWordsContainer';
 import {AppHeaderContainer} from './navigation/containers/AppHeaderContainer';
 import {userSelector} from './selectors/auth.selectors';
 

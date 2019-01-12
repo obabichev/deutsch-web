@@ -1,10 +1,10 @@
 import {connect} from 'react-redux';
 
 import {LearnWordsComponent} from '../components/LearnWordsComponent';
-import {glossarySelectorByPath} from '../selectors/glossary.selectors';
-import {downloadWordProgresses, saveWordProgress} from '../actions/thunk/wordProgress.thunk';
-import {downloadGlossary} from '../actions/thunk/glossary.thunk.actions';
-import {wordProgressesOfGlossarySelector} from '../selectors/wordProgress.selectors';
+import {glossarySelectorByPath} from '../../selectors/glossary.selectors';
+import {downloadWordProgresses, saveWordProgress} from '../../actions/thunk/wordProgress.thunk';
+import {downloadGlossary} from '../../actions/thunk/glossary.thunk.actions';
+import {wordProgressesOfGlossarySelector} from '../../selectors/wordProgress.selectors';
 
 const mapStateToProps = (state, props) => ({
     glossary: glossarySelectorByPath(state, props),

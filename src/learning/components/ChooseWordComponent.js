@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import {fullForm} from '../util/words';
+import {fullForm} from '../../util/words';
+import './ChooseWordComponent.css';
 
 export class ChooseWordComponent extends Component {
 
@@ -57,11 +58,13 @@ export class ChooseWordComponent extends Component {
             return this.renderCardResult();
         }
 
-        return <div>
-            <div style={{margin: '10px'}}>
-                <p>{currentCard ? currentCard.translation.val : ''}</p>
+        return <div className="choose-word-container">
+            <div>
+                <h2 className="choose-word-value">
+                    {currentCard ? currentCard.translation.val : ''}
+                </h2>
             </div>
-            <div style={{display: 'flex', flexFlow: 'row wrap'}}>
+            <div className="choose-word-cards-container">
                 {cards.map(this.renderCard(currentCard))}
             </div>
         </div>;
@@ -69,9 +72,10 @@ export class ChooseWordComponent extends Component {
 
     renderCard = currentCard => (card, index) => {
         return <div key={index}
-                    style={{margin: '10px', padding: '5px', backgroundColor: 'lightgray'}}
+                    className="choose-word-card-container"
                     onClick={this.onCardClick(card)}>
-            <p>{fullForm(card.word)}</p>
+            <span className="choose-word-card-text">{fullForm(card.word)}</span>
+            <span className="choose-word-card-index">{index + 1}</span>
         </div>;
     };
 

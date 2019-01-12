@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
 
-import {fullForm} from '../util/words';
+import {fullForm} from '../../util/words';
 
 export class LearnWordsTypingComponent extends Component {
 
