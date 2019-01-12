@@ -102,17 +102,31 @@ export class ChooseWordComponent extends Component {
     renderCardResult = () => {
         const {cardResult} = this.state;
         const {isCorrect} = cardResult;
-        return <div style={{margin: '10px'}}>
+        return <div className="choose-word-container">
             <form onSubmit={this.onCardResultClick}>
-                <div style={{padding: '5px', backgroundColor: isCorrect ? 'green' : 'red'}}>
-                    <p>{isCorrect ? 'Success' : 'Fail'}</p>
+                <div>
+                    {isCorrect && <h2 className="choose-word-result-success-color">Right!</h2>}
+                    {!isCorrect && <h2 className="choose-word-result-fail-color">Wrong!</h2>}
                 </div>
-                <p>Word: {cardResult.expectedCard.translation.val}</p>
-                <p>Expected: {fullForm(cardResult.expectedCard.word)}</p>
-                <p>Actual: {fullForm(cardResult.actualCard.word)}</p>
-                <button ref={ref => ref && ref.focus()}>Next</button>
+                {this.renderLabeledText('Translation', cardResult.expectedCard.translation.val)}
+                {this.renderLabeledText('Right answer', fullForm(cardResult.expectedCard.word))}
+                {!isCorrect && this.renderLabeledText('Your answer', fullForm(cardResult.actualCard.word), true)}
+                <button
+                    className="choose-word-continue-button"
+                    ref={ref => ref && ref.focus()}>
+                    Press Enter to continue...
+                </button>
             </form>
         </div>;
+    };
+
+    renderLabeledText = (label, text, isRed = false) => {
+        const textClassName = `${isRed ? 'choose-word-result-fail-color' : 'choose-word-labeled-text'} `;
+
+        return <div className="choose-word-labeled-container">
+            <div className="choose-word-labeled-label">{label}</div>
+            <div className={textClassName}>{text}</div>
+        </div>
     };
 
     onCardResultClick = (event) => {
