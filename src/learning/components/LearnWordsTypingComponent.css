@@ -1,0 +1,45 @@
+.typing-word-container {
+    max-width: 500px;
+    border: 1px solid #404040;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.typing-word-card-text {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.625;
+    color: #455358;
+    font-family: hurme_no2-webfont, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.typing-word-card-input {
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: inherit;
+    display: block;
+    font: inherit;
+    line-height: inherit;
+    outline: none;
+    overflow: hidden;
+    resize: none;
+    text-shadow: inherit;
+    width: 250px;
+}
+
+.typing-word-card-input-container {
+
+}
+
+.typing-word-card-input-underline {
+    width: 250px;
+    background-color: #6b7fdd;
+    height: 2px;
+}
+
+.typing-word-card-form {
+    margin: 10px 0;
+}

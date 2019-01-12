@@ -112,7 +112,7 @@ export class ChooseWordComponent extends Component {
                 {this.renderLabeledText('Right answer', fullForm(cardResult.expectedCard.word))}
                 {!isCorrect && this.renderLabeledText('Your answer', fullForm(cardResult.actualCard.word), true)}
                 <button
-                    className="choose-word-continue-button"
+                        className="choose-word-continue-button"
                     ref={ref => ref && ref.focus()}>
                     Press Enter to continue...
                 </button>

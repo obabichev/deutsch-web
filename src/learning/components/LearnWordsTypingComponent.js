@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import _ from 'lodash';
 
+import './LearnWordsTypingComponent.css';
 import {fullForm} from '../../util/words';
 
 export class LearnWordsTypingComponent extends Component {
@@ -24,21 +24,23 @@ export class LearnWordsTypingComponent extends Component {
             return this.renderCardResult();
         }
 
-        return <div>
-            <h2>Words typing</h2>
-            {this.renderInputWord(card)}
-        </div>;
+        return this.renderInputWord(card);
     }
 
     renderInputWord = (card) => {
-        return <div>
-            <div>
-                {card.translation.val}
-            </div>
-            <form onSubmit={this.onSubmit(card)}>
-                <input value={this.state.input}
-                       onChange={this.onChangeInput}
-                       ref={ref => this.ref = ref}/>
+        return <div className="typing-word-container">
+            <span className="typing-word-card-text">{card.translation.val}</span>
+            <form onSubmit={this.onSubmit(card)}
+                  className="typing-word-card-form">
+                <div className="typing-word-card-input-container">
+                    <input className="typing-word-card-input"
+                           value={this.state.input}
+                           onChange={this.onChangeInput}
+                           placeholder="Your answer..."
+                           ref={ref => this.ref = ref}>
+                    </input>
+                    <div class="typing-word-card-input-underline"></div>
+                </div>
             </form>
         </div>;
     };
@@ -74,17 +76,31 @@ export class LearnWordsTypingComponent extends Component {
     renderCardResult = () => {
         const {cardResult} = this.state;
         const {isCorrect} = cardResult;
-        return <div style={{margin: '10px'}}>
+        return <div className="choose-word-container">
             <form onSubmit={this.onClickCardResult}>
-                <div style={{padding: '5px', backgroundColor: isCorrect ? 'green' : 'red'}}>
-                    <p>{isCorrect ? 'Success' : 'Fail'}</p>
+                <div>
+                    {isCorrect && <h2 className="choose-word-result-success-color">Right!</h2>}
+                    {!isCorrect && <h2 className="choose-word-result-fail-color">Wrong!</h2>}
                 </div>
-                <p>Word: {cardResult.expectedCard.translation.val}</p>
-                <p>Expected: {fullForm(cardResult.expectedCard.word)}</p>
-                <p>Actual: {cardResult.actualValue}</p>
-                <button ref={ref => ref && ref.focus()}>Next</button>
+                {this.renderLabeledText('Translation', cardResult.expectedCard.translation.val)}
+                {this.renderLabeledText('Right answer', fullForm(cardResult.expectedCard.word))}
+                {!isCorrect && this.renderLabeledText('Your answer', cardResult.actualValue, true)}
+                <button
+                    className="choose-word-continue-button"
+                    ref={ref => ref && ref.focus()}>
+                    Press Enter to continue...
+                </button>
             </form>
         </div>;
+    };
+
+    renderLabeledText = (label, text, isRed = false) => {
+        const textClassName = `${isRed ? 'choose-word-result-fail-color' : 'choose-word-labeled-text'} `;
+
+        return <div className="choose-word-labeled-container">
+            <div className="choose-word-labeled-label">{label}</div>
+            <div className={textClassName}>{text}</div>
+        </div>
     };
 
     onClickCardResult = (event) => {
