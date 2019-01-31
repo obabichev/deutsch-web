@@ -7,11 +7,15 @@ import {Button} from '../../core/components/Button';
 export class GlossariesListComponent extends Component {
 
     componentDidMount() {
-        const {updateGlossaries} = this.props;
-        updateGlossaries();
+        const {initGlossariesListContainer} = this.props;
+        initGlossariesListContainer();
     }
 
     render() {
+        if (!this.props.glossaries) {
+            return <div/>;
+        }
+
         return <div className="glossaries-container">
             {this.renderGlossariesHeader()}
             <div className="glossaries-content-container">
@@ -42,7 +46,6 @@ export class GlossariesListComponent extends Component {
     };
 
     onDeleteClick = (glossaryId) => () => {
-        console.log('[obabichev] DELETE', glossaryId);
         this.props.removeGlossary(glossaryId);
     };
 

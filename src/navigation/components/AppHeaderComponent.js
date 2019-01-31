@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import './AppHeaderComponent.css';
 import {history} from '../../helpers/history';
 import {Icon} from '../../core/components/Icon';
+import {HorizontalLoaderComponent} from './HorizontalLoaderComponent';
 
 export class AppHeaderComponent extends Component {
 
@@ -25,21 +26,33 @@ export class AppHeaderComponent extends Component {
         if (!user) {
             return <></>;
         }
-        return <div className="app-header">
-            <div className="app-header-logo">
-                <h2 className="app-header-logo-text" onClick={this.onHomeClick}>Dapp</h2>
+        return <div>
+            <div className="app-header">
+                <div className="app-header-logo">
+                    <h2 className="app-header-logo-text" onClick={this.onHomeClick}>Dapp</h2>
+                </div>
+                <div className="app-header-delimiter"/>
+                {this.renderRepeatWords()}
+                <div className="app-header-user app-header-element">
+                    {user.name}
+                </div>
+                <div className="app-header-logout app-header-element"
+                     onClick={this.onLogoutClick}>
+                    <Icon width="32px" height="32px" icon="exit"/>
+                </div>
             </div>
-            <div className="app-header-delimiter"/>
-            {this.renderRepeatWords()}
-            <div className="app-header-user app-header-element">
-                {user.name}
-            </div>
-            <div className="app-header-logout app-header-element"
-                 onClick={this.onLogoutClick}>
-                <Icon width="32px" height="32px" icon="exit"/>
-            </div>
-        </div>;
+            {this.renderLoader()}
+        </div>
     }
+
+    renderLoader = () => {
+        const {isLoading} = this.props;
+        if (!isLoading) {
+            return null;
+        }
+
+        return <HorizontalLoaderComponent/>;
+    };
 
     renderRepeatWords = () => {
         const {repeatWordsCount} = this.props;

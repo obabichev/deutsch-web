@@ -4,7 +4,7 @@ import {GlossariesListContainer} from '../glossaries/containers/GlossariesListCo
 export class HomeComponent extends Component {
 
     componentDidMount() {
-        this.props.getWordsToRepeat();
+        this.props.initHomeContainer();
     }
 
     render() {

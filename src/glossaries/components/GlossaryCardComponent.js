@@ -23,11 +23,8 @@ export class GlossaryCardComponent extends Component {
     };
 
     onDeleteIconClick = (event) => {
-        console.log('[obabichev] on delete icon click', event);
         event.stopPropagation();
-        // event.preventDefault();
         const {onDeleteClick} = this.props;
-        console.log('[obabichev] onDeleteClick', onDeleteClick);
         if (onDeleteClick) {
             onDeleteClick();
         }

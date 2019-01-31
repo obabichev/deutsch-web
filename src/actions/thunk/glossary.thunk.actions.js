@@ -6,21 +6,27 @@ import {
 } from '../glossary.actions';
 import {createGlossaryCard, delGlossaryCard} from '../../service/glossaryCard';
 import {history} from '../../helpers/history';
+import {errorLoadingActionWrapper} from '../../helpers/actions';
 
 export const downloadGlossaries = () => dispatch => {
-    getGlossaries().then(
-        glossaries => {
-            dispatch(glossariesListAction(glossaries));
-        }
-    )
+    return getGlossaries()
+        .then(glossaries => {
+                dispatch(glossariesListAction(glossaries));
+            }
+        )
 };
 
-export const downloadGlossary = (id) => dispatch => {
-    return getGlossary(id).then(
-        glossary => {
-            dispatch(glossaryItemAction(glossary));
-        }
-    )
+export const initGlossariesListContainerAction = () => errorLoadingActionWrapper(downloadGlossaries());
+
+export const downloadGlossary = (id) => errorLoadingActionWrapper(_downloadGlossary(id));
+
+export const _downloadGlossary = (id) => dispatch => {
+    return getGlossary(id)
+        .then(
+            glossary => {
+                dispatch(glossaryItemAction(glossary));
+            }
+        );
 };
 
 export const createGlossary = (title) => dispatch => {

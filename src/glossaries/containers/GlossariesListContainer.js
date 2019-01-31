@@ -1,6 +1,9 @@
 import {connect} from 'react-redux';
 import {GlossariesListComponent} from '../components/GlossariesListComponent';
-import {createGlossary, downloadGlossaries, removeGlossary} from '../../actions/thunk/glossary.thunk.actions';
+import {
+    createGlossary, initGlossariesListContainerAction,
+    removeGlossary
+} from '../../actions/thunk/glossary.thunk.actions';
 import {glossariesSelector} from '../../selectors/glossary.selectors';
 
 const mapStateToProps = (state) => ({
@@ -8,7 +11,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    updateGlossaries: () => dispatch(downloadGlossaries()),
+    initGlossariesListContainer: () => dispatch(initGlossariesListContainerAction()),
     createGlossary: (title) => dispatch(createGlossary(title)),
     removeGlossary: (glossaryId) => dispatch(removeGlossary(glossaryId)),
 });

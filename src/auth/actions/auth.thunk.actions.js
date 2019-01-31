@@ -1,7 +1,7 @@
 import * as authActions from './auth.actions';
 import * as loadingActions from '../../actions/loading.actions';
 import {history} from '../../helpers/history';
-import {errorAction} from '../../core/actions/error.actions';
+import {setErrorAction} from '../../core/actions/error.actions';
 
 export const login = (email, password) => dispatch => {
     dispatch(loadingActions.loadingStartAction());
@@ -32,7 +32,7 @@ export const login = (email, password) => dispatch => {
         })
         .catch(err => {
             dispatch(loadingActions.loadingEndAction());
-            dispatch(errorAction(err));
+            dispatch(setErrorAction(err));
         });
 };
 
@@ -64,7 +64,7 @@ export const register = (user) => dispatch => {
         })
         .catch(err => {
             dispatch(loadingActions.loadingEndAction());
-            dispatch(errorAction(err));
+            dispatch(setErrorAction(err));
         });
 };
 

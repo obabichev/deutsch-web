@@ -1,3 +1,4 @@
+import {networkErrorException} from '../../core/middlewares/errors/networkErrorException';
 const request = ({url, method, body}) => {
     let user = JSON.parse(localStorage.getItem('user'));
 
@@ -14,9 +15,17 @@ const request = ({url, method, body}) => {
             if (method === 'delete') {
                 return null;
             }
+
+            if (response.status !== 200 && response.status !== 201) {
+                throw networkErrorException(response.status, response.statusText);
+            }
+
             return response.json();
-        });
+        })
+        .then((result) => waitPromise(result));
 };
+
+const waitPromise = (result) => new Promise(r => setTimeout(() => r(result), 1000));
 
 const get = (url) => {
     return request({url, method: 'get'});
